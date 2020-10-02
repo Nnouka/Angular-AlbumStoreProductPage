@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {map as m} from "rxjs/add/operator/map";
+// import {map as m} from "rxjs/add/operator/map";
 import {map} from 'rxjs/operators';
 import {Observable} from "rxjs";
 import {Album} from "./album";
@@ -16,8 +16,10 @@ private _productsUrl = '../assets/products.json';
       map(response => <Album> response.json())
     );
   }
-  getProducts(): Observable<Product[]> {
-    return  this._http.get(this._productsUrl).map(response => <Product[]>response.json())
+  getProducts(): Observable<Product> {
+    return  this._http.get(this._productsUrl).pipe(
+      map(response => response.json())
+    );
   }
 }
 
